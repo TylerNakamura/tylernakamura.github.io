@@ -4,6 +4,8 @@ title: About
 permalink: /about/
 ---
 
+<img src="/images/2017/2017-07 Grand Canyon.jpeg"/>
+
 A developer striving to automate everything.
 
 Personal Links:
@@ -23,7 +25,6 @@ Causes I Support:
 Noteworthy Links:
 
 - [DEF CON Media Server](https://media.defcon.org/)
-- [King of that Hill](http://kingofthathill.com)
 - [Soma.fm](http://soma.fm)
 - [Linux Academy](https://linuxacademy.com/)
 - [rclone on Github](https://github.com/ncw/rclone)

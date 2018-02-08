@@ -4,6 +4,8 @@ title:
 permalink: /
 ---
 
+<img src="/images/2016/2016 Airplane.jpeg"/>
+
 Hello, my name is Tyler.
 I love my full time career as a software engineer with a focus in cloud technologies.
 One day, I would also like to be a real estate investor.
