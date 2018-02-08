@@ -17,4 +17,4 @@ In life, there have been a tremendous amount of people that have afforded great 
 Being grateful for these people, I hope that I can pay those privileges forward.
 I hope that the content I produce on the WWW is useful and beneficial to others.
 
-See my <a href="tylernakamura.com/blog">blog</a> or my 'about' <a href="tylernakamura.com/about">page</a> for more information.
+See my <a href="tylernakamura.com/blog.html">blog</a> or my 'about' <a href="/about">page</a> for more information.
