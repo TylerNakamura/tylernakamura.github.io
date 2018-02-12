@@ -4,7 +4,7 @@ title:
 permalink: /
 ---
 
-<img src="/images/2016/2016 Airplane.jpeg"/>
+<img src="/images/2014/2014onbuilding.jpg"/>
 
 Hello, my name is Tyler.
 I love my full time career as a software engineer with a focus in cloud technologies.
