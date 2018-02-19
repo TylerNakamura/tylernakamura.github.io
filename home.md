@@ -4,7 +4,7 @@ title:
 permalink: /
 ---
 
-<img src="/images/2014/2014onbuilding.jpg"/>
+<img src="/images/2014/2014onbuilding.jpg" alt="Tyler sitting on a skyscraper in Honolulu"/>
 
 Hello, my name is Tyler.
 I love my full time career as a software engineer with a focus in cloud technologies.

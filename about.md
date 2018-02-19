@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-<img src="/images/2004/2004tylersurf.JPG"/>
+<img src="/images/2004/2004tylersurf.JPG" alt="My father teaching me how to surf in Hawaii"/>
 
 I was born and raised in Hawaii and spent much of my childhood surfing, hunting, and playing soccer.
 I also found myself often playing video games all the time.
