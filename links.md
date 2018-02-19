@@ -14,7 +14,9 @@ Causes I Support:
 Some Notable Links:
 
 - [DEF CON Media Server](https://media.defcon.org/) - lots of cool free stuff about hacking from Defcon
+- [Hacker News](https://news.ycombinator.com/) - a forum for techie people to discuss the tech news
 - [Soma.fm](http://soma.fm) - a commercial free internet radio
 - [Linux Academy](https://linuxacademy.com/) - a great way to learn about Linux
+- [Music for Programming](https://musicforprogramming.net/) - A free music site that consists of white noise and sounds to enhance your programming experience
 - [rclone on Github](https://github.com/ncw/rclone) - an awesome tool to help back up your data to cloud storage providers
 - [youtube-dl on Github](https://github.com/rg3/youtube-dl) - a tool to download almost any video off the internet
