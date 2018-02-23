@@ -21,3 +21,7 @@ Some Notable Links:
 - [Music for Programming](https://musicforprogramming.net/) - A free music site that consists of white noise and sounds to enhance your programming experience
 - [rclone on Github](https://github.com/ncw/rclone) - an awesome tool to help back up your data to cloud storage providers
 - [youtube-dl on Github](https://github.com/rg3/youtube-dl) - a tool to download almost any video off the internet
+
+Interesting Articles:
+
+- [2018-01-30 Ranking Net Worth by Age Income Degree and Gender](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - interesting article on net worth in its current state
