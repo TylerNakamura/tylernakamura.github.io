@@ -19,6 +19,7 @@ Some Notable Links:
 - [Soma.fm](http://soma.fm) - a commercial free internet radio
 - [Linux Academy](https://linuxacademy.com/) - a great way to learn about Linux
 - [Music for Programming](https://musicforprogramming.net/) - A free music site that consists of white noise and sounds to enhance your programming experience
+- [OBS](https://obsproject.com/) - OBS Studio is excellent software to do video recording and live streaming. Great license, great software.
 - [rclone on Github](https://github.com/ncw/rclone) - an awesome tool to help back up your data to cloud storage providers
 - [youtube-dl on Github](https://github.com/rg3/youtube-dl) - a tool to download almost any video off the internet
 
