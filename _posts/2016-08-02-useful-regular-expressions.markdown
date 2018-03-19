@@ -34,6 +34,12 @@ Example matches:
 - sickclip.mp4
 - stuff.avi
 
+Examples use (Linux):
+```bash
+# to search $SOURCE_DIR and cp RegEx matches to $TARGET_DIR
+# be sure not to overwrite existing files with cp command (possibly use no clobber? -n)
+find $SOURCE_DIR -regex ".*\.\(webm\|mkv\|flv\|vob\|ogv\|ogg\|drc\|gif\|gifv\|mng\|avi\|mov\|qt\|wmv\|yuv\|rm\|rmvb\|asf\|amv\|mp4\|m4p\|m4v\|mpg\|mp2\|mpeg\|mpe\|mpv\|mpg\|mpeg\|m2v\|m4v\|svi\|3gp\|3g2\|mxf\|roq\|nsv\|f4v\|f4p\|f4a\|f4b\)" -exec cp {} $TARGET_DIR \;
+```
 
 ### ipv4 address
 ```bash
