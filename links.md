@@ -15,6 +15,7 @@ Some Notable Links:
 
 - [Anki Flashcards](https://apps.ankiweb.net/) - powerful open source flash card software
 - [Bigger Pockets](https://biggerpockets.com) - a Real Estate community with a great podcast and active forums
+- [Camelcamelcamel](https://camelcamelcamel.com) - an Amazon price tracker. Tells if you the deals are real.
 - [DEF CON Media Server](https://media.defcon.org/) - lots of cool free stuff about hacking from Defcon
 - [Hacker News](https://news.ycombinator.com/) - a forum for techie people to discuss the tech news
 - [Soma.fm](http://soma.fm) - a commercial free internet radio
