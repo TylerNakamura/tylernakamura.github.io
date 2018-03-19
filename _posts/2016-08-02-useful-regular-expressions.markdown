@@ -20,13 +20,19 @@ Example:
 
 ### Video Types
 ```bash
-\.(mkv|mp4|avi|mov)
+*\.(webm|mkv|flv|vob|ogv|ogg|drc|gif|gifv|mng|avi|mov|qt|wmv|yuv|rm|rmvb|asf|amv|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|mpg|mpeg|m2v|m4v|svi|3gp|3g2|mxf|roq|nsv|f4v|f4p|f4a|f4b)
 ```
-Example:
 
-- mkv
-- mp4
-- avi
+Note that in the above example, it is case sensitive.
+I opted to not imlement a case sensitive RegEx as it varies between RegEx implementations.
+See [here](https://stackoverflow.com/questions/9655164/regex-ignore-case-sensitivity) for more details.
+See [this page](https://en.wikipedia.org/wiki/Video_file_format) on Wikipedia for an explanation on extension types.
+
+Example matches:
+
+- mymovie.mkv
+- sickclip.mp4
+- stuff.avi
 
 
 ### ipv4 address
