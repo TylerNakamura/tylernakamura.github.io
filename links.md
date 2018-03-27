@@ -27,4 +27,5 @@ Some Notable Links:
 
 Interesting Articles:
 
-- [2018-01-30 Ranking Net Worth by Age Income Degree and Gender](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - interesting article on net worth in its current state
+- [2018-01-30 Ranking Net Worth by Age Income Degree and Gender - earnest.com](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - net worth in its current state
+- [2018-03-26 Why I usually run 'w' first when troubleshooting unknown machines - rachelbythebay.com](https://rachelbythebay.com/w/2018/03/26/w/) - for SRE campfire storytelling
