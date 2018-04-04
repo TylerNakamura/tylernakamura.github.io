@@ -20,3 +20,7 @@ My primary focus today is in Real Estate and how it builds long-term residual we
 I believe that we live in the most exciting time period of human civilization.
 The advancement of technology we experience today is abnormal, the world looks vastly different today than it did 100 years ago.
 I am thrilled to watch how technology further changes the world.
+
+### Favorite Quote
+
+"It is the mark of an educated mind to be able to entertain a thought without accepting it." -Aristotle
