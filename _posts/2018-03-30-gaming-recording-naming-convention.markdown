@@ -18,16 +18,17 @@ Below outlines the protocol and some of my thought processes.
 |---|---|---|
 |Date  | Limited [ISO8601 Timestamp](https://en.wikipedia.org/wiki/ISO_8601)|`2018` `2018-01` `2018-12-29` `2018-03-30T15`  |
 ||||
-|Game|Name of Game Played | `Runescape` `Fornite` `FN` `SC2` `WoW` |
+|Game|Name (or Abbreviation) of Game Played | `Fornite` `FN` `SC2` `WoW` `Runescape` `HOTS` |
+||||
+|Rewatch Value|  A number from 0 to 9 describing your desire to rewatch later. 9 is most rewatch worthy | `0` `5` `9`|
+||||
+|Full or Partial Recording| Distinguish between full recordings and partial recordings, f is a full recording, p is a partial recording| `f` `p`  |
 ||||
 |Players| Comma separated list of player names| `tyler` `todd, billy joel, sam` |
 ||||
 |Description| Description of the event| `fun` `awesome fun times` `that one time that John farted` `ranked games`|
 ||||
-|Rewatch Value|  A number from 0 to 9 describing your desire to rewatch later. 9 is most rewatch worthy | `0` `5` `9`|
-||||
-|Full or Partial Recording| Distinguish between full recordings and clip, f is a full recording, c is a clip| `f` `c`  |
-||||
+
 
 ### Rules:
 - Use a single `_`(underscore) to delimit each field.
@@ -37,13 +38,13 @@ Below outlines the protocol and some of my thought processes.
 
 Examples:
 ```
-2018-01-01_HOTS_timothy, sally, janet jackson_lots of fun with lost vikings_5_c.mkv
-2018-02-02_Halo5_tyler_just solo play with battle rifle_0_f.mkv
+2018-01-01_HOTS_5_c_timothy, sally, janet jackson_lots of fun with lost vikings.mkv
+2018-02-02_Halo5_6_f_tyler_just solo play with battle rifle.mkv
 
 # missing fields are ok
-2018_WoW__fun_5_f.mkv
-2018__tyler_fun_5_f.mkv
-2018_wow_tyler__5_f.mkv
+2018_WoW_5_f__fun.mkv
+2018__5_f_tyler_fun.mkv
+2018_wow_5__tyler_.mkv
 ```
 
 ---
@@ -113,7 +114,7 @@ ISO8601 makes use of `-`s as its own delimiter.
 Plex doesn't incorporate that, so we have to find our own delimiter that transcends this.
 For example, imagine if GRNC1 used `-` as a delimiter:
 ```
-2018-01-01 - FN -Tyler, Bean - desc - 9 - c.mp4
+2018-01-01 - FN - 9 - p -Tyler, Bean - a description of the recording.mp4
 ```
 This file would really throw off parsing as the parser wouldn't be able to differentiate what the delimiter is delimitting.
 It would be cumbersome to distinguish ISO8601 dashes from GRNC1 dashes.
@@ -201,7 +202,7 @@ The decision to put the protocol version in the file name was considered.
 Getting inspiration from a lot of networking protocols, I think that there is value in putting the protocol version in the file name.
 An example might look like this (note the last field):
 ```
-2018-01-01_HOTS_John,Jake_playing ranked games_9_f_GRNC1.mkv
+2018-01-01_HOTS_9_f_John,Jake_playing ranked games_GRNC1.mkv
 ```
 Having the protocol version in the file name means that you could smoothly transition from an older version of the protocol to a newer one.
 For example, if there was a GRNC2 that was released, but most clients still only supported GRNC1, you could easily modify old code:
@@ -243,14 +244,18 @@ def parseGRNC1(fileName):
 	# string name of the game played
 	game = fields[1].strip()
 
-	# a list of the names of the players
-	list_of_people = fields[2].strip().split(",")
-
 	# an integer from 0 to 9 describing how much it was worth rewatching
-	rewatch_factor = int(fields[0].strip())
+	rewatch_factor = int(fields[2].strip())
 
-	# a boolean, if true, the video is a full recording and not just a short clip (this is subjective)
-	full_recording = fields[0].strip().lower() == 'f'
+	# a boolean, if true, the video is a full recording and not a partial recording
+	full_recording = fields[3].strip().lower() == 'f'
+
+	# a list of the names of the players
+	list_of_people = fields[4].strip().split(",")
+
+	# a description of the recording
+	recording_description = fields[5].strip()
+
 ```
 See? Because we were disciplined in naming the file correctly, parsing it is simple. <3
 
