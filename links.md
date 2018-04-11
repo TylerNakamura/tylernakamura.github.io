@@ -33,4 +33,8 @@ More:
 - [2005-12-28 Be More Productive - Aaron Swartz](http://www.aaronsw.com/weblog/productivity) - Aaron Swartz on how to be more productive
 - [2018-03-26 Why I usually run 'w' first when troubleshooting unknown machines - rachelbythebay.com](https://rachelbythebay.com/w/2018/03/26/w/) - for SRE campfire storytelling
 - [2018-01-30 Ranking Net Worth by Age Income Degree and Gender - earnest.com](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - net worth in its current state
-- [2013-04-12 News is Bad - Rolf Dobelli at the Guardian](https://www.theguardian.com/media/2013/apr/12/news-is-bad-rolf-dobelli)
+- [2013-04-12 News is Bad - Rolf Dobelli at the Guardian](https://www.theguardian.com/media/2013/apr/12/news-is-bad-rolf-dobelli) - why news is bad
+
+Wikipedia:
+
+- [Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
