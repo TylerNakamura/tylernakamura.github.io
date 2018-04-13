@@ -23,8 +23,6 @@ I am thrilled to watch how technology further changes the world.
 
 ---
 
-### Favorite Quotes
-
 "It is the mark of an educated mind to be able to entertain a thought without accepting it." - Aristotle
 
 "Only the educated are free" - Epictetus
