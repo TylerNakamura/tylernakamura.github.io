@@ -28,3 +28,5 @@ I am thrilled to watch how technology further changes the world.
 "It is the mark of an educated mind to be able to entertain a thought without accepting it." - Aristotle
 
 "Only the educated are free" - Epictetus
+
+"Given enough eyeballs, all bugs are shallow" ~ [Linus](https://en.wikipedia.org/wiki/Linus%27s_Law)
