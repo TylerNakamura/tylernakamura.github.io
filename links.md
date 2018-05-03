@@ -38,4 +38,5 @@ More:
 Wikipedia:
 
 - [Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
+- [List of Lists of Lists](https://en.wikipedia.org/wiki/List_of_lists_of_lists)
 - [Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
