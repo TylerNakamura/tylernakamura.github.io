@@ -38,3 +38,4 @@ More:
 Wikipedia:
 
 - [Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
+- [Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
