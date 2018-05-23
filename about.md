@@ -28,3 +28,5 @@ I am thrilled to watch how technology further changes the world.
 *"Given enough eyeballs, all bugs are shallow"* ~ [Linus](https://en.wikipedia.org/wiki/Linus%27s_Law)
 
 "*This too shall pass*"
+
+*"Living well is the best revenge"* - George Herbert
