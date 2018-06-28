@@ -35,6 +35,7 @@ Articles:
 - [2001 How To Become A Hacker - Eric Steven Raymond](http://www.catb.org/esr/faqs/hacker-howto.html)
 - [2005-12-28 Be More Productive - Aaron Swartz](http://www.aaronsw.com/weblog/productivity) - Aaron Swartz on how to be more productive
 - [2013-04-12 News is Bad - Rolf Dobelli at the Guardian](https://www.theguardian.com/media/2013/apr/12/news-is-bad-rolf-dobelli) - why news is bad
+- [2013-11-07 What happens when you type google.com into your browser - Github Repo](https://github.com/alex/what-happens-when)
 - [2018-03-26 Why I usually run 'w' first when troubleshooting unknown machines - rachelbythebay.com](https://rachelbythebay.com/w/2018/03/26/w/) - for SRE campfire storytelling
 - [2018-01-30 Ranking Net Worth by Age Income Degree and Gender - earnest.com](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - net worth in its current state
 
