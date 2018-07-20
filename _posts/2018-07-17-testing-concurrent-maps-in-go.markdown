@@ -16,7 +16,7 @@ How do you process the transactions in the fastest manner?
 
 <img src="/images/2018/07/general.png"/>
 
-The naive solution is to process the queue one by one.
+The naive approach is to process the queue one by one.
 
 <img src="/images/2018/07/approach1.png"/>
 
@@ -24,7 +24,7 @@ But we want to be fast! :)
 So of course, we have many goroutines to process our queue.
 The problem is, what happens when two goroutines want to mutate a value within the same key?
 Duhh, race condition.
-Our next naive solution is to place a mutex lock on the map.
+Our next naive approach is to place a mutex lock on the map.
 By placing a mutex lock for the map, we can ensure that no two goroutines access it at the same time.
 
 <img src="/images/2018/07/approach2.png"/>
@@ -38,12 +38,12 @@ That way, many keys can be mutated at the same time.
 <img src="/images/2018/07/approach3.png"/>
 
 This article aims to look at these three approaches, measure them, and show my findings.
-Spoiler alert, solution 3 is the fastest.
+Spoiler alert, approach 3 is the fastest.
 
-## A Sample Implementation
+## Sample Implementation
 I wanted to see what each of these looked like in code.
 It was a good opportunity for me to practice some concurrency patterns in Go.
-I already knew what solution would be the quickest, but I wanted to create a demo of what this might look like.
+I already knew what approach would be the quickest, but I wanted to create a demo of what this might look like.
 
 ```go
 package main
@@ -338,19 +338,19 @@ Milliseconds to Process (Key Lock):    16.631619999999998
 ```
 
 ## Conclusion
-We knew that solution 3 would be the fastest but it was fun to fiddle with each of the variables and watch the results change.
+We knew that approach 3 would be the fastest but it was fun to fiddle with each of the variables and watch the results change.
 I especially loved seeing a pattern in which a channel was used as a queue.
 You can find it in the code above, but it really just looks like this:
 ```go
 // declare a queue of things to process using a buffered channel
 myQueue := make(chan thingToProcess, size)
 // add things onto the queue
-myQueue <- temp
+myQueue <- thingToProcess
 // process things off the queue by reading from the channel
 processItem(<-thingToProcess)
 ```
 
-TLDR: *By placing mutex locks on each of the keys, instead of the entire map, we were able to increase our speeds depending on how many keys there were*
+TLDR: *By placing mutex locks on each of the keys, instead of the entire map, we were able to increase our concurrency depending on the number of keys.*
 
 ## CPU
 Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
