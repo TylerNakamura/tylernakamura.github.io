@@ -1,18 +1,18 @@
 ---
 layout: post
-title: "Testing Concurrent Map Operations in Go"
+title: "Concurrent Map Operations in Go"
 date: 2018-07-17
 comments: false
 published: True
-categories: go concurrency maps
+categories: go concurrency maps mutex sync
 ---
 
 ## The Problem
-Imagine you had a map.
+You have map.
 This map stored many custom structs with many numerical values.
-Now imagine you had a queue of transactions waiting to mutate that map.
+We also have queue of transactions waiting to mutate values in the map.
 Some transactions reduced values in the map, while others increased them.
-How do you process the transactions in the fastest manner?
+How might you process transactions in the fastest manner?
 
 <img src="/images/2018/07/general.png"/>
 
@@ -21,29 +21,29 @@ The naive approach is to process the queue one by one.
 <img src="/images/2018/07/approach1.png"/>
 
 But we want to be fast! :)
-So of course, we have many goroutines to process our queue.
-The problem is, what happens when two goroutines want to mutate a value within the same key?
-Duhh, race condition.
+So of course, we could spawn multiple Goroutines to process our queue.
+The problem is, what happens when two Goroutines want to mutate a value within the same key at the same time?
+We will most likely have a race condition of course!
 Our next naive approach is to place a mutex lock on the map.
-By placing a mutex lock for the map, we can ensure that no two goroutines access it at the same time.
+By placing a mutex lock for the map, we can ensure that no two Goroutines access a given key/value at the same time.
 
 <img src="/images/2018/07/approach2.png"/>
 
 "But we want it to be faster!"
 Okay, okay.
 My next trick is to place a lock on _each_ key of the map.
-Because the value of this map is a custom struct, we can create a unique lock for each of the keys.
-That way, many keys can be mutated at the same time.
+We can use a custom struct to represent the values of our map and place a unique mutex on each value.
+This way, many different keys can be mutated at the same time.
 
 <img src="/images/2018/07/approach3.png"/>
 
-This article aims to look at these three approaches, measure them, and show my findings.
+This article aims to look at these three approaches, measure them, and share my findings.
 Spoiler alert, approach 3 is the fastest.
 
-## Sample Implementation
+## Implementation
 I wanted to see what each of these looked like in code.
-It was a good opportunity for me to practice some concurrency patterns in Go.
-I already knew what approach would be the quickest, but I wanted to create a demo of what this might look like.
+It also served as a good opportunity for me to practice some concurrency in Go.
+My hypothesis is that approach 3 would be the fastest, but I wanted to create a demo and see it for myself.
 
 ```go
 package main
@@ -263,7 +263,7 @@ func createRandomizedWarehouse(id int, r *rand.Rand) warehouse{
 // creates and returns a single warehouse transaction struct with randomized data
 func createRandomizedWarehouseTransaction(numberOfWarehouses int, r *rand.Rand) warehouseTransaction{
 	temp := warehouseTransaction{}
-	// I want to randomize whether or not this is an increase or a decrease, this is my lazy way of coming up with a boolean, I'm sure there is a better way to do it
+
 	temp.increase = (r.Intn(2) + 1) % 2 == 0
 
 	// randomly select one of the warehouses to apply this transaction to
@@ -285,7 +285,7 @@ func prettyPrintWarehouse(input warehouse){
 
 ## Results
 
-1 Warehouse (no concurrency available for any of the approaches):
+1 Warehouse (no concurrency available):
 ```bash
 ========================VARIABLES======================
 Total Number of Warehouses:            1
@@ -313,7 +313,7 @@ Milliseconds to Process (Key Lock):    1203.4260100000001
 =======================================================
 ```
 
-Many Warehouses:
+Many Warehouses (lots of concurrency available):
 ```bash
 ========================VARIABLES======================
 Total Number of Warehouses:            1000
@@ -328,8 +328,8 @@ Milliseconds to Process (Key Lock):    16.631619999999998
 ```
 
 ## Conclusion
-We knew that approach 3 would be the fastest but it was fun to fiddle with each of the variables and watch the results change.
-I especially loved seeing a pattern in which a channel was used as a queue.
+It was fun to fiddle with each of the variables and watch the results dance.
+I especially loved learning about a pattern in which a channel could be used as a queue.
 You can find it in the code above, but it really just looks like this:
 ```go
 // declare a queue of things to process using a buffered channel
