@@ -8,10 +8,10 @@ categories: go concurrency maps mutex sync
 ---
 
 ## The Problem
-You have map.
-This map stored many custom structs with many numerical values.
-We also have queue of transactions waiting to mutate values in the map.
-Some transactions reduced values in the map, while others increased them.
+You have a map.
+This map stores many custom structs with many numerical values.
+We also have a queue of transactions attempting to mutate values in the map.
+Some transactions want to reduce values in the map, while others want to increase them.
 How might you process transactions in the fastest manner?
 
 <img src="/images/2018/07/general.png"/>
@@ -20,9 +20,9 @@ The naive approach is to process the queue one by one.
 
 <img src="/images/2018/07/approach1.png"/>
 
-But we want to be fast! :)
+But we want to the process the queue quickly! :)
 So of course, we could spawn multiple Goroutines to process our queue.
-The problem is, what happens when two Goroutines want to mutate a value within the same key at the same time?
+The problem is, what happens when two Goroutines want to mutate the same key/value at the same time?
 We will most likely have a race condition of course!
 Our next naive approach is to place a mutex lock on the map.
 By placing a mutex lock for the map, we can ensure that no two Goroutines access a given key/value at the same time.
@@ -31,8 +31,8 @@ By placing a mutex lock for the map, we can ensure that no two Goroutines access
 
 "But we want it to be faster!"
 Okay, okay.
-My next trick is to place a lock on _each_ key of the map.
-We can use a custom struct to represent the values of our map and place a unique mutex on each value.
+My next trick is to place a lock on _each_ key/value of the map.
+We can use a custom struct to represent the values of our map and place a unique mutex on each.
 This way, many different keys can be mutated at the same time.
 
 <img src="/images/2018/07/approach3.png"/>
@@ -43,7 +43,7 @@ Spoiler alert, approach 3 is the fastest.
 ## Implementation
 I wanted to see what each of these looked like in code.
 It also served as a good opportunity for me to practice some concurrency in Go.
-My hypothesis is that approach 3 would be the fastest, but I wanted to create a demo and see it for myself.
+My hypothesis was that approach 3 would be the fastest, but I wanted to create a demo and see it for myself.
 
 ```go
 package main
