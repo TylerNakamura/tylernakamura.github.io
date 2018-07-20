@@ -55,7 +55,7 @@ import (
 	"math/rand"
 )
 
-// a fictitious object
+// a fictitious object representing a warehouse
 type warehouse struct {
 	// NOTE: read/write mutex for EACH warehouse
 	rwlock sync.RWMutex
@@ -77,6 +77,7 @@ type warehouseTransaction struct {
 	// otherwise, the warehouse inventory is being deducted
 	increase bool
 
+	// that ID of the warehouse that the transaction should be acted against
 	targetWarehouse int
 
 	balesOfHay int
@@ -88,9 +89,9 @@ type warehouseTransaction struct {
 
 func main() {
 	// VARIABLES
-	numberOfWarehouses := 1
-	numberOfTransactions := 1000
-	millisecondsToProcess := 2
+	numberOfWarehouses := 10000
+	numberOfTransactions := 1000000
+	millisecondsToProcess := 0
 
 	warehouseMap1 := make(map[int]*warehouse)
 	warehouseMap2 := make(map[int]*warehouse)
@@ -128,7 +129,7 @@ func main() {
 	// start a timer
 	queue1Start := time.Now()
 	for i := 0; i < numberOfTransactions; i++ {
-		transactWithoutLock(warehouseMap1, <-queue1, r, millisecondsToProcess)
+		processTransaction(warehouseMap1, <-queue1, r, millisecondsToProcess, false)
 	}
 	queue1Duration := time.Since(queue1Start)
 
@@ -141,12 +142,13 @@ func main() {
 	wg.Add(numberOfTransactions)
 	for i := 0; i < numberOfTransactions; i++ {
 		go func() {
+			// lock the entire map
 			mutex.Lock()
 			defer func() {
 				wg.Done()
 				mutex.Unlock()
 			}()
-			transactWithoutLock(warehouseMap2, <-queue2, r, millisecondsToProcess)
+			processTransaction(warehouseMap2, <-queue2, r, millisecondsToProcess, false)
 		}()
 	}
 	// block until all the goroutines are done
@@ -161,7 +163,7 @@ func main() {
 	for i := 0; i < numberOfTransactions; i++ {
 		go func() {
 			defer wg.Done()
-			transactWithKeyLock(warehouseMap3, <-queue3, r, millisecondsToProcess)
+			processTransaction(warehouseMap3, <-queue3, r, millisecondsToProcess, true)
 		}()
 	}
 	// block until all the goroutines are done
@@ -177,6 +179,7 @@ func main() {
 	if !warehousesAreEqual(warehouseMap1, warehouseMap3) {
 		fmt.Println("FAILURE: The Map1 and Map3 did not have the same end state, something went wrong in the processing")
 	}
+
 	fmt.Println("========================VARIABLES======================")
 	fmt.Printf("Total Number of Warehouses:            %d\n", numberOfWarehouses)
 	fmt.Printf("Total Number of Transactions:          %d\n", numberOfTransactions)
@@ -189,6 +192,7 @@ func main() {
 	fmt.Println("=======================================================")
 }
 
+// evaluates two warehouse objects to determine if they share the same exact
 func warehousesAreEqual(whMap1 map[int]*warehouse, whMap2 map[int]*warehouse) bool{
 	for k, v := range(whMap1) {
 		if v.balesOfHay != whMap2[k].balesOfHay {
@@ -212,34 +216,19 @@ func warehousesAreEqual(whMap1 map[int]*warehouse, whMap2 map[int]*warehouse) bo
 			return false
 		}
 	}
+	if len(whMap1) != len(whMap2) {
+		fmt.Printf("Warehouses are not equal in length")
+		return false
+	}
 	return true
 }
 
-func transactWithoutLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, millisecondsToProcess int){
-	time.Sleep(time.Duration(millisecondsToProcess) * time.Millisecond)
-
-	// if it's an increase type transaction, add resources to the target warehouse
-	if transaction.increase {
-		whMap[transaction.targetWarehouse].balesOfHay += transaction.balesOfHay
-		whMap[transaction.targetWarehouse].porkChops += transaction.porkChops
-		whMap[transaction.targetWarehouse].waterBottles += transaction.waterBottles
-		whMap[transaction.targetWarehouse].gadgets += transaction.gadgets
-		whMap[transaction.targetWarehouse].gizmos += transaction.gizmos
-	} else { // otherwise, deduct from the target warehouse
-		whMap[transaction.targetWarehouse].balesOfHay -= transaction.balesOfHay
-		whMap[transaction.targetWarehouse].porkChops -= transaction.porkChops
-		whMap[transaction.targetWarehouse].waterBottles -= transaction.waterBottles
-		whMap[transaction.targetWarehouse].gadgets -= transaction.gadgets
-		whMap[transaction.targetWarehouse].gizmos -= transaction.gizmos
+func processTransaction(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, millisecondsToProcess int, useKeyLock bool){
+	if useKeyLock {
+		// you will notice that if you comment out these locking lines, you will end up with race conditions and your resulting maps will not be the same
+		whMap[transaction.targetWarehouse].rwlock.Lock()
+		defer whMap[transaction.targetWarehouse].rwlock.Unlock()
 	}
-}
-
-func transactWithKeyLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, millisecondsToProcess int){
-	// NOTE: this transaction is identical to transactWithoutLock, except in this case we block to acquire the lock
-	// you will notice that if you comment out these locking lines, you will end up with race conditions and your resulting maps are not the same!
-	// this is the behaviour we expect :D
-	whMap[transaction.targetWarehouse].rwlock.Lock()
-	defer whMap[transaction.targetWarehouse].rwlock.Unlock()
 
 	time.Sleep(time.Duration(millisecondsToProcess) * time.Millisecond)
 
@@ -260,7 +249,7 @@ func transactWithKeyLock(whMap map[int]*warehouse, transaction warehouseTransact
 }
 
 // creates and returns a single warehouse struct with randomized data
-func createRandomizedWarehouse(id int, r *rand.Rand)warehouse{
+func createRandomizedWarehouse(id int, r *rand.Rand) warehouse{
 	temp := warehouse{}
 	temp.id = id
 	temp.balesOfHay = r.Intn(10000)
@@ -271,10 +260,11 @@ func createRandomizedWarehouse(id int, r *rand.Rand)warehouse{
 	return temp
 }
 
-func createRandomizedWarehouseTransaction(numberOfWarehouses int, r *rand.Rand)warehouseTransaction{
+// creates and returns a single warehouse transaction struct with randomized data
+func createRandomizedWarehouseTransaction(numberOfWarehouses int, r *rand.Rand) warehouseTransaction{
 	temp := warehouseTransaction{}
 	// I want to randomize whether or not this is an increase or a decrease, this is my lazy way of coming up with a boolean, I'm sure there is a better way to do it
-	temp.increase = (r.Intn(10) + 1) % 2 == 0
+	temp.increase = (r.Intn(2) + 1) % 2 == 0
 
 	// randomly select one of the warehouses to apply this transaction to
 	temp.targetWarehouse = r.Intn(numberOfWarehouses)
@@ -287,10 +277,10 @@ func createRandomizedWarehouseTransaction(numberOfWarehouses int, r *rand.Rand)w
 	return temp
 }
 
+// for debugging purposes, will print out a warehouse struct in a nice format
 func prettyPrintWarehouse(input warehouse){
 	fmt.Printf("Warehouse #%d - Bales of Hay: %d, Pork Chops: %d, Water Bottles: %d, Gadgets: %d, Gizmos: %d\n", input.id, input.balesOfHay, input.porkChops, input.waterBottles, input.gadgets, input.gizmos)
 }
-
 ```
 
 ## Results
