@@ -347,7 +347,7 @@ myQueue := make(chan thingToProcess, size)
 // add things onto the queue
 myQueue <- thingToProcess
 // process things off the queue by reading from the channel
-processItem(<-thingToProcess)
+processItem(<-myQueue)
 ```
 
 TLDR: *By placing mutex locks on each of the keys, instead of the entire map, we were able to increase our concurrency depending on the number of keys.*
