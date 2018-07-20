@@ -8,13 +8,17 @@ categories: go concurrency maps
 ---
 
 ## The Problem
-Imagine you had a big map (or dict for your Pythonistas)
+Imagine you had a map.
 This map stored many custom structs with many numerical values.
 Now imagine you had a queue of transactions waiting to mutate that map.
 Some transactions reduced values in the map, while others increased them.
-How do you process the transactions?
+How do you process the transactions in the fastest manner?
+
+<img src="/images/2018/07/general.png"/>
 
 The naive solution is to process the queue one by one.
+
+<img src="/images/2018/07/approach1.png"/>
 
 But we want to be fast! :)
 So of course, we have many goroutines to process our queue.
@@ -23,27 +27,23 @@ Duhh, race condition.
 Our next naive solution is to place a mutex lock on the map.
 By placing a mutex lock for the map, we can ensure that no two goroutines access it at the same time.
 
+<img src="/images/2018/07/approach2.png"/>
+
 "But we want it to be faster!"
 Okay, okay.
 My next trick is to place a lock on _each_ key of the map.
 Because the value of this map is a custom struct, we can create a unique lock for each of the keys.
 That way, many keys can be mutated at the same time.
 
+<img src="/images/2018/07/approach3.png"/>
+
 This article aims to look at these three approaches, measure them, and show my findings.
 Spoiler alert, solution 3 is the fastest.
 
 ## A Sample Implementation
-// create our custom struct
-// each struct has its own lock
-// create a map of our custom structs
-// create a list of transactions
-// get a correct answer
-// do the same work in parallel
-// create a queue
-// populate queue
-// run many threads to go through the queue
-// each thread needs to sleep for a tiny bit (jitter) to pretend like it's working
-// compare the correct answer with the parallel answer
+I wanted to see what each of these looked like in code.
+It was a good opportunity for me to practice some concurrency patterns in Go.
+I already knew what solution would be the quickest, but I wanted to create a demo of what this might look like.
 
 ```go
 package main
@@ -55,12 +55,12 @@ import (
 	"math/rand"
 )
 
-// let's pretend we are tracking many warehouses that have a count of these random items
+// a fictitious object
 type warehouse struct {
-	// note that we have a read write mutex for EACH warehouse
+	// NOTE: read/write mutex for EACH warehouse
 	rwlock sync.RWMutex
 
-	// unique id
+	// unique identifier for this warehouse
 	id int
 
 	// characteristics
@@ -87,112 +87,136 @@ type warehouseTransaction struct {
 }
 
 func main() {
-	// the map that keeps track of all of our warehouses
-	warehouses1 := make(map[int]*warehouse)
-	warehouses2 := make(map[int]*warehouse)
+	// VARIABLES
+	numberOfWarehouses := 1
+	numberOfTransactions := 1000
+	millisecondsToProcess := 2
 
-	numberOfWarehouses := 100
-	numberOfTransactions := 5000
-
-	maxMillisecondJitter := 4
-
-	// use a buffered channel as a queue
-	// we have two because, we are going to go through them twice, once with multi threads, and another time serialized
+	warehouseMap1 := make(map[int]*warehouse)
+	warehouseMap2 := make(map[int]*warehouse)
+	warehouseMap3 := make(map[int]*warehouse)
 	queue1 := make(chan warehouseTransaction, numberOfTransactions)
 	queue2 := make(chan warehouseTransaction, numberOfTransactions)
+	queue3 := make(chan warehouseTransaction, numberOfTransactions)
 
 	// generate new seed: https://gobyexample.com/random-numbers
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 
-	// populate warehouses with many random warehouse structs
-	fmt.Println("Populating Warehouse Map")
+	var wg sync.WaitGroup
+
+	//  ================================= POPULATE RANDOM DATA ========================
+	fmt.Println("Populating Warehouse Maps with Random Data")
 	for i := 0; i < numberOfWarehouses; i++ {
 		temp1 := createRandomizedWarehouse(i, r)
 		temp2 := temp1
-		warehouses1[i] = &temp1
-		warehouses2[i] = &temp2
+		temp3 := temp1
+		warehouseMap1[i] = &temp1
+		warehouseMap2[i] = &temp2
+		warehouseMap3[i] = &temp3
 	}
-
-	fmt.Println("Populating Queues with Random Warehouse Transactions")
-	// populate the queues with random warehouse transactions
+	fmt.Println("Populating Queues with Random Transactions")
 	for i := 0; i < numberOfTransactions; i++ {
 		temp := createRandomizedWarehouseTransaction(numberOfWarehouses, r)
-		// push random transaction onto both queues
 		queue1 <- temp
 		queue2 <- temp
+		queue3 <- temp
 	}
 
-	//  ================================= SERIAL PROCCESSING ===================================
+	//  ================================= SERIAL PROCCESSING ============================
 	fmt.Println("Processing Queue1 with Serial Processing")
 	// start a timer
-	serialStart := time.Now()
+	queue1Start := time.Now()
 	for i := 0; i < numberOfTransactions; i++ {
-		transactWithoutLock(warehouses1, <-queue1, r, maxMillisecondJitter)
+		transactWithoutLock(warehouseMap1, <-queue1, r, millisecondsToProcess)
 	}
-	serialElapsed := time.Since(serialStart)
+	queue1Duration := time.Since(queue1Start)
 
-	//  ================================= CONCURRENT PROCESSING =================================
-	fmt.Println("Processing Queue2 with Concurrent Processing")
+	//  ================================= CONCURRENT PROCESSING (map lock) ===============
+	fmt.Println("Processing Queue2 with Map Locking")
 	// start a timer
-	concurrentStart := time.Now()
-	var wg sync.WaitGroup
+	queue2Start := time.Now()
+	// a mutex lock to lock the entire map
+	var mutex = &sync.Mutex{}
+	wg.Add(numberOfTransactions)
+	for i := 0; i < numberOfTransactions; i++ {
+		go func() {
+			mutex.Lock()
+			defer func() {
+				wg.Done()
+				mutex.Unlock()
+			}()
+			transactWithoutLock(warehouseMap2, <-queue2, r, millisecondsToProcess)
+		}()
+	}
+	// block until all the goroutines are done
+	wg.Wait()
+	queue2Duration := time.Since(queue2Start)
+
+	//  ================================= CONCURRENT PROCESSING (key lock) ==============
+	fmt.Println("Processing Queue3 with Key Locking")
+	// start a timer
+	queue3Start := time.Now()
 	wg.Add(numberOfTransactions)
 	for i := 0; i < numberOfTransactions; i++ {
 		go func() {
 			defer wg.Done()
-			transactWithLock(warehouses2, <-queue2, r, maxMillisecondJitter)
+			transactWithKeyLock(warehouseMap3, <-queue3, r, millisecondsToProcess)
 		}()
 	}
+	// block until all the goroutines are done
 	wg.Wait()
-	concurrentElapsed := time.Since(concurrentStart)
+	queue3Duration := time.Since(queue3Start)
 
-
-	//  ================================= CHECK RESULTS =======================================
+	//  ================================= RESULTS =======================================
 	// we want to make sure that our concurrent results were able to achieve the same end result as the serial results
 	fmt.Println()
-	if !warehousesAreEqual(warehouses1, warehouses2) {
-		fmt.Println("FAILURE: The warehouse maps did not have the same end state, something went wrong in the processing")
-	} else {
-		fmt.Println("=======================================================")
-		fmt.Printf("Total Number of Warehouses:      %d\n", numberOfWarehouses)
-		fmt.Printf("Total Number of Transactions:    %d\n", numberOfTransactions)
-		fmt.Printf("Seconds to Process in Serial:    %v\n", serialElapsed.Seconds())
-		fmt.Printf("Seconds to Process Concurrently: %v\n", concurrentElapsed.Seconds())
-		fmt.Println("=======================================================")
+	if !warehousesAreEqual(warehouseMap1, warehouseMap2) {
+		fmt.Println("FAILURE: The Map1 and Map2 did not have the same end state, something went wrong in the processing")
 	}
+	if !warehousesAreEqual(warehouseMap1, warehouseMap3) {
+		fmt.Println("FAILURE: The Map1 and Map3 did not have the same end state, something went wrong in the processing")
+	}
+	fmt.Println("========================VARIABLES======================")
+	fmt.Printf("Total Number of Warehouses:            %d\n", numberOfWarehouses)
+	fmt.Printf("Total Number of Transactions:          %d\n", numberOfTransactions)
+	fmt.Printf("Milliseconds to Process a Transaction: %d\n", millisecondsToProcess)
+	fmt.Println("=======================================================")
+	fmt.Println("==========================RESULTS======================")
+	fmt.Printf("Milliseconds to Process (Serial):      %v\n", queue1Duration.Seconds() * 1000)
+	fmt.Printf("Milliseconds to Process (Map Lock):    %v\n", queue2Duration.Seconds() * 1000)
+	fmt.Printf("Milliseconds to Process (Key Lock):    %v\n", queue3Duration.Seconds() * 1000)
+	fmt.Println("=======================================================")
 }
 
 func warehousesAreEqual(whMap1 map[int]*warehouse, whMap2 map[int]*warehouse) bool{
 	for k, v := range(whMap1) {
 		if v.balesOfHay != whMap2[k].balesOfHay {
-			fmt.Printf("WarehouseMap1 Warehouse #%d has %d balesOfHay, WarehouseMap2 Warehouse #%d has %d balesOfHay\n", k, v.balesOfHay, k, whMap2[k].balesOfHay)
+			fmt.Printf("Warehouse #%d has %d balesOfHay and Warehouse #%d has %d balesOfHay. The warehouse maps are not equal!\n", k, v.balesOfHay, k, whMap2[k].balesOfHay)
 			return false
 		}
 		if v.porkChops != whMap2[k].porkChops {
-			fmt.Printf("WarehouseMap1 Warehouse #%d has %d porkChops, WarehouseMap2 Warehouse #%d has %d porkChops\n", k, v.porkChops, k, whMap2[k].porkChops)
+			fmt.Printf("Warehouse #%d has %d porkChops and Warehouse #%d has %d porkChops. The warehouse maps are not equal!\n", k, v.porkChops, k, whMap2[k].porkChops)
 			return false
 		}
 		if v.waterBottles != whMap2[k].waterBottles {
-			fmt.Printf("WarehouseMap1 Warehouse #%d has %d waterBottles, WarehouseMap2 Warehouse #%d has %d waterBottles\n", k, v.waterBottles, k, whMap2[k].waterBottles)
+			fmt.Printf("Warehouse #%d has %d waterBottles and Warehouse #%d has %d waterBottles. The warehouse maps are not equal!\n", k, v.waterBottles, k, whMap2[k].waterBottles)
 			return false
 		}
 		if v.gadgets != whMap2[k].gadgets {
-			fmt.Printf("WarehouseMap1 Warehouse #%d has %d gadgets, WarehouseMap2 Warehouse #%d has %d gadgets\n", k, v.gadgets, k, whMap2[k].gadgets)
+			fmt.Printf("Warehouse #%d has %d gadgets and Warehouse #%d has %d gadgets. The warehouse maps are not equal!\n", k, v.gadgets, k, whMap2[k].gadgets)
 			return false
 		}
 		if v.gizmos != whMap2[k].gizmos {
-			fmt.Printf("WarehouseMap1 Warehouse #%d has %d gizmos, WarehouseMap2 Warehouse #%d has %d gizmos\n", k, v.gizmos, k, whMap2[k].gizmos)
+			fmt.Printf("Warehouse #%d has %d gizmos and Warehouse #%d has %d gizmos. The warehouse maps are not equal!\n", k, v.gizmos, k, whMap2[k].gizmos)
 			return false
 		}
 	}
 	return true
 }
 
-func transactWithoutLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, maxMillisecondJitter int){
-	// pretend like we are doing some work, like network/disk io
-	jitter := r.Intn(maxMillisecondJitter)
-	time.Sleep(time.Duration(jitter) * time.Millisecond)
+func transactWithoutLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, millisecondsToProcess int){
+	time.Sleep(time.Duration(millisecondsToProcess) * time.Millisecond)
 
 	// if it's an increase type transaction, add resources to the target warehouse
 	if transaction.increase {
@@ -210,16 +234,14 @@ func transactWithoutLock(whMap map[int]*warehouse, transaction warehouseTransact
 	}
 }
 
-func transactWithLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, maxMillisecondJitter int){
-	// pretend like we are doing some work, like network/disk io
-	jitter := r.Intn(maxMillisecondJitter)
-	time.Sleep(time.Duration(jitter) * time.Millisecond)
-
+func transactWithKeyLock(whMap map[int]*warehouse, transaction warehouseTransaction, r *rand.Rand, millisecondsToProcess int){
 	// NOTE: this transaction is identical to transactWithoutLock, except in this case we block to acquire the lock
 	// you will notice that if you comment out these locking lines, you will end up with race conditions and your resulting maps are not the same!
 	// this is the behaviour we expect :D
 	whMap[transaction.targetWarehouse].rwlock.Lock()
 	defer whMap[transaction.targetWarehouse].rwlock.Unlock()
+
+	time.Sleep(time.Duration(millisecondsToProcess) * time.Millisecond)
 
 	// if it's an increase type transaction, add resources to the target warehouse
 	if transaction.increase {
@@ -266,9 +288,69 @@ func createRandomizedWarehouseTransaction(numberOfWarehouses int, r *rand.Rand)w
 }
 
 func prettyPrintWarehouse(input warehouse){
-	fmt.Println(fmt.Sprintf("Warehouse #%d - Bales of Hay: %d, Pork Chops: %d, Water Bottles: %d, Gadgets: %d, Gizmos: %d", input.id, input.balesOfHay, input.porkChops, input.waterBottles, input.gadgets, input.gizmos))
+	fmt.Printf("Warehouse #%d - Bales of Hay: %d, Pork Chops: %d, Water Bottles: %d, Gadgets: %d, Gizmos: %d\n", input.id, input.balesOfHay, input.porkChops, input.waterBottles, input.gadgets, input.gizmos)
 }
 
 ```
 
+## Results
+
+1 Warehouse (no concurrency available for any of the approaches):
+```bash
+========================VARIABLES======================
+Total Number of Warehouses:            1
+Total Number of Transactions:          1000
+Milliseconds to Process a Transaction: 2
+=======================================================
+==========================RESULTS======================
+Milliseconds to Process (Serial):      2539.431903
+Milliseconds to Process (Map Lock):    2306.711409
+Milliseconds to Process (Key Lock):    2314.826846
+=======================================================
+```
+
+2 Warehouses (minimal concurrency available):
+```bash
+========================VARIABLES======================
+Total Number of Warehouses:            2
+Total Number of Transactions:          1000
+Milliseconds to Process a Transaction: 2
+=======================================================
+==========================RESULTS======================
+Milliseconds to Process (Serial):      2392.9029210000003
+Milliseconds to Process (Map Lock):    2366.987177
+Milliseconds to Process (Key Lock):    1203.4260100000001
+=======================================================
+```
+
+Many Warehouses:
+```bash
+========================VARIABLES======================
+Total Number of Warehouses:            1000
+Total Number of Transactions:          1000
+Milliseconds to Process a Transaction: 2
+=======================================================
+==========================RESULTS======================
+Milliseconds to Process (Serial):      2476.1787520000003
+Milliseconds to Process (Map Lock):    2461.1052760000002
+Milliseconds to Process (Key Lock):    16.631619999999998
+=======================================================
+```
+
+## Conclusion
+We knew that solution 3 would be the fastest but it was fun to fiddle with each of the variables and watch the results change.
+I especially loved seeing a pattern in which a channel was used as a queue.
+You can find it in the code above, but it really just looks like this:
+```go
+// declare a queue of things to process using a buffered channel
+myQueue := make(chan thingToProcess, size)
+// add things onto the queue
+myQueue <- temp
+// process things off the queue by reading from the channel
+processItem(<-thingToProcess)
+```
+
+TLDR: *By placing mutex locks on each of the keys, instead of the entire map, we were able to increase our speeds depending on how many keys there were*
+
+## CPU
 Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
