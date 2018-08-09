@@ -12,7 +12,7 @@ Causes:
 - [Internet Archive](https://archive.org/) - people that help preserve stuff from the internet
 - [Don't Name Them](http://www.dontnamethem.org/) - don't sensationalize shooters
 
-Projects:
+Favorite Projects:
 
 - [Anki Flashcards](https://apps.ankiweb.net/) - powerful open source flash card software
 - [Camelcamelcamel](https://camelcamelcamel.com) - an Amazon price tracker. Tells if you the deals are real.
@@ -39,9 +39,10 @@ Articles:
 - [2018-03-26 Why I usually run 'w' first when troubleshooting unknown machines - rachelbythebay.com](https://rachelbythebay.com/w/2018/03/26/w/) - for SRE campfire storytelling
 - [2018-01-30 Ranking Net Worth by Age Income Degree and Gender - earnest.com](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - net worth in its current state
 
-Wikipedia:
+Information:
 
-- [Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
-- [List of Lists of Lists](https://en.wikipedia.org/wiki/List_of_lists_of_lists)
-- [List of Unusual Articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
-- [Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
+- [Wikipedia: Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
+- [Wikipedia: List of Lists of Lists](https://en.wikipedia.org/wiki/List_of_lists_of_lists)
+- [Wikipedia: List of Unusual Articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
+- [Wikipedia: Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
+- [Wireshark Sample Captures](https://wiki.wireshark.org/SampleCaptures)
