@@ -9,9 +9,10 @@ Favorite Causes:
 - [Electronic Frontier Foundation (EFF)](https://www.eff.org/) - people that protect our internet freedoms
 - [Free Software Foundation](https://www.fsf.org/) - people that help create free and open source software
 - [The Linux Foundation](https://www.linuxfoundation.org/) - people that help the Linux project
-- [Internet Archive](https://archive.org/) - people that help preserve stuff from the internet
+- [Internet Archive](https://archive.org/) - archiving the internet
 - [Don't Name Them](http://www.dontnamethem.org/) - don't sensationalize shooters
 - [Invisible People](https://invisiblepeople.tv/) - documenting homelessness
+- [Wikimedia](https://wikimediafoundation.org/about/) - Wikipedia
 
 Favorite Projects:
 
