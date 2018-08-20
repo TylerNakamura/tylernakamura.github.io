@@ -4,13 +4,14 @@ title:
 permalink: /links/
 ---
 
-Causes:
+Favorite Causes:
 
 - [Electronic Frontier Foundation (EFF)](https://www.eff.org/) - people that protect our internet freedoms
 - [Free Software Foundation](https://www.fsf.org/) - people that help create free and open source software
 - [The Linux Foundation](https://www.linuxfoundation.org/) - people that help the Linux project
 - [Internet Archive](https://archive.org/) - people that help preserve stuff from the internet
 - [Don't Name Them](http://www.dontnamethem.org/) - don't sensationalize shooters
+- [Invisible People](https://invisiblepeople.tv/) - documenting homelessness
 
 Favorite Projects:
 
@@ -23,13 +24,13 @@ Favorite Projects:
 - [rclone on Github](https://github.com/ncw/rclone) - an awesome tool to help back up your data to cloud storage providers
 - [youtube-dl on Github](https://github.com/rg3/youtube-dl) - a tool to download almost any video off the internet
 
-Communities:
+Favorite Communities:
 
 - [Bigger Pockets](https://biggerpockets.com) - a Real Estate community with a great podcast and active forums
 - [Hacker News](https://news.ycombinator.com/) - a forum for techie people to discuss the tech news
 - [Linux Academy](https://linuxacademy.com/) - a great way to learn about Linux
 
-Articles:
+Favorite Articles:
 
 - [1992 The Tanenbaum-Torvalds Debate on Microkernels vs Monolithic Kernels](https://www.oreilly.com/openbook/opensources/book/appa.html)
 - [2001 How To Become A Hacker - Eric Steven Raymond](http://www.catb.org/esr/faqs/hacker-howto.html)
@@ -39,10 +40,12 @@ Articles:
 - [2018-03-26 Why I usually run 'w' first when troubleshooting unknown machines - rachelbythebay.com](https://rachelbythebay.com/w/2018/03/26/w/) - for SRE campfire storytelling
 - [2018-01-30 Ranking Net Worth by Age Income Degree and Gender - earnest.com](https://www.earnest.com/blog/ranking-net-worth-by-age-income-degree-and-gender/) - net worth in its current state
 
-Information:
+Favorite Resources:
 
 - [Wikipedia: Linus's Law](https://en.wikipedia.org/wiki/Linus%27s_Law)
 - [Wikipedia: List of Lists of Lists](https://en.wikipedia.org/wiki/List_of_lists_of_lists)
 - [Wikipedia: List of Unusual Articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
+- [Wikipedia: Shoshin](https://en.wikipedia.org/wiki/Shoshin)
+- [Wikipedia: Locus of Control](https://en.wikipedia.org/wiki/Locus_of_control)
 - [Wikipedia: Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
 - [Wireshark Sample Captures](https://wiki.wireshark.org/SampleCaptures)
