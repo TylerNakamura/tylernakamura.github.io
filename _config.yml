@@ -7,7 +7,7 @@
 
 # Site settings
 title: Tyler Nakamura
-email: public@gmail.com
+email: public@tylernakamura.com
 description: > # this means to ignore newlines until "baseurl:"
     :wq
 baseurl: "" # the subpath of your site, e.g. /blog
