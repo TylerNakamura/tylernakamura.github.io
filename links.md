@@ -4,7 +4,7 @@ title:
 permalink: /links/
 ---
 
-Favorite Causes:
+Causes:
 
 - [Electronic Frontier Foundation (EFF)](https://www.eff.org/) - people that protect our internet freedoms
 - [Free Software Foundation](https://www.fsf.org/) - people that help create free and open source software
@@ -14,7 +14,7 @@ Favorite Causes:
 - [Invisible People](https://invisiblepeople.tv/) - documenting homelessness
 - [Wikimedia](https://wikimediafoundation.org/about/) - Wikipedia
 
-Favorite Resources:
+Resources:
 
 - [Anki Flashcards](https://apps.ankiweb.net/) - powerful open source flash card software
 - [Camelcamelcamel](https://camelcamelcamel.com) - an Amazon price tracker. Tells if you the deals are real.
@@ -31,13 +31,7 @@ Favorite Resources:
 - [Wikipedia: Hedonic Treadmill](https://en.wikipedia.org/wiki/Hedonic_treadmill)
 - [Wireshark Sample Captures](https://wiki.wireshark.org/SampleCaptures) [youtube-dl on Github](https://github.com/rg3/youtube-dl) - a tool to download almost any video off the internet
 
-Favorite Communities:
-
-- [Bigger Pockets](https://biggerpockets.com) - a Real Estate community with a great podcast and active forums
-- [Hacker News](https://news.ycombinator.com/) - a forum for techie people to discuss the tech news
-- [Linux Academy](https://linuxacademy.com/) - a great way to learn about Linux
-
-Favorite Articles:
+Articles:
 
 - [1992 The Tanenbaum-Torvalds Debate on Microkernels vs Monolithic Kernels](https://www.oreilly.com/openbook/opensources/book/appa.html)
 - [2001 How To Become A Hacker - Eric Steven Raymond](http://www.catb.org/esr/faqs/hacker-howto.html)
