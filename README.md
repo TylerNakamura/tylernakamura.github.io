@@ -1,1 +1,0 @@
-# tylernakamura.github.io
