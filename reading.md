@@ -3,7 +3,7 @@ layout: page
 permalink: /reading/
 ---
 
-Here’s a curated list of non-fiction books that have had a significant impact on my life. I believe each one offers valuable insights that anyone can benefit from, and I hope they resonate with you as much as they have with me.
+Here’s a curated list of non-fiction books that have had a significant impact on my life. I believe each one offers valuable insights that anyone can benefit from. I hope they resonate with you as much as they have with me.
 
 ---
 
