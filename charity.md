@@ -17,6 +17,11 @@ This organization works to stop the glorification of mass shooters by urging the
 
 ---
 
+### [Ploughshares Fund](https://ploughshares.org/)
+Ploughshares Fund is a global security foundation that works to reduce and ultimately eliminate the threat of nuclear weapons. Through strategic grantmaking and advocacy, they support initiatives aimed at stopping the spread of nuclear arms and advancing global peace and security.
+
+---
+
 ### [Electronic Frontier Foundation (EFF)](https://www.eff.org/)
 The EFF defends civil liberties in the digital world. From privacy and free expression to security, EFF champions user rights and fights against unlawful surveillance, ensuring that the internet remains a free and open space for all.
 
