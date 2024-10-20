@@ -3,16 +3,21 @@ layout: page
 permalink: /big-island/
 ---
 
-# The Big Island
+# The Big Island of Hawai'i
 
-Interesting facts about the Big Island:
-- It hosts 10 of the world’s 14 climate zones.
-- The island continues to grow due to ongoing eruptions (40 acres/year).
-- Mauna Kea is the tallest mountain on Earth when measured from its base to its summit. (33,500 feet)
-- The Big Island is larger than all the other Hawaiian islands combined (4,028 square miles).
+- It hosts 10 of the world’s 14 Köppen climate zones.
+- The island continues to grow due to ongoing eruptions (~40 ac/yr).
+- Mauna Kea is the tallest mountain on Earth when measured from its base to its summit. (~33,500ft)
+- The Big Island is larger than all the other Hawaiian islands combined (~4,028 sq mi).
 - It boasts beaches with green, black, and white sand.
-- South Point is the southernmost point in the United States. (18° 55' N latitude)
-- The Big Island is the youngest of Hawaii’s above-water islands (500,000y).
+- South Point (Ka Lae) is the southernmost point in the United States. (18° 55' N)
+- The Big Island is the youngest of Hawaii’s above-water islands (~500,000 y/o).
+
+I’ve shared some of my favorite recommendations for outdoor activities. For the real hidden gems, you’ll have to ask me in person.
+
+Please don’t take anything from the islands. Even small actions like collecting sand, rocks, or shells can have a lasting impact on Hawaii's fragile ecosystems by speeding up erosion and affecting the natural beauty of the islands.
+
+Mahalo, and have an unforgettable trip! 🌺
 
 ___
 
@@ -31,8 +36,8 @@ This 442-foot waterfall is located along a scenic trail surrounded by lush tropi
 ### Hilton Waikoloa Village
 A sprawling oceanfront resort, Hilton Waikoloa Village is perfect for families or anyone looking for luxury amenities. The property features lagoon swimming, boat rides, a dolphin experience, and beautiful gardens.
 
-### Puu Waawaa Forest Reserve
-Puu Waawaa Forest Reserve is an incredible hiking spot located on the slopes of Hualalai. The reserve offers trails that wind through native Hawaiian dryland forests, providing breathtaking views of both Mauna Kea and Mauna Loa. The area is home to unique wildlife and plant species, making it a fantastic location for hikers interested in both scenic beauty and biodiversity.
+### Pu'u Wa'awa'a Forest Reserve
+Puu Wa'awa'a Forest Reserve is an incredible hiking spot located on the slopes of Hualalai. The reserve offers trails that wind through native Hawaiian dryland forests, providing breathtaking views of both Mauna Kea and Mauna Loa. The area is home to unique wildlife and plant species, making it a fantastic location for hikers interested in both scenic beauty and biodiversity.
 
 ### Kua Bay
 This beach is a local favorite for its soft white sand, clear turquoise waters, and great snorkeling opportunities. Located just north of Kona, Kua Bay is perfect for swimming or simply relaxing under the sun.
