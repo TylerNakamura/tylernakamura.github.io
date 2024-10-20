@@ -7,15 +7,12 @@ permalink: /big-island/
 
 Interesting facts about the Big Island:
 - It hosts 10 of the world’s 14 climate zones.
-- The island continues to grow due to ongoing eruptions from Kīlauea.
-- Mauna Kea is the tallest mountain on Earth when measured from its base to its summit.
-- The Big Island is larger than all the other Hawaiian islands combined.
+- The island continues to grow due to ongoing eruptions (40 acres/year).
+- Mauna Kea is the tallest mountain on Earth when measured from its base to its summit. (33,500 feet)
+- The Big Island is larger than all the other Hawaiian islands combined (4,028 square miles).
 - It boasts beaches with green, black, and white sand.
-- Mauna Loa is the largest active volcano on the planet.
-- South Point is the southernmost point in the United States.
-- The Big Island is the youngest of Hawaii’s above-water islands.
-
-Here is an unordered list of my favorite places to hike and explore the outdoors on the big island.
+- South Point is the southernmost point in the United States. (18° 55' N latitude)
+- The Big Island is the youngest of Hawaii’s above-water islands (500,000y).
 
 ___
 
@@ -33,6 +30,9 @@ This 442-foot waterfall is located along a scenic trail surrounded by lush tropi
 
 ### Hilton Waikoloa Village
 A sprawling oceanfront resort, Hilton Waikoloa Village is perfect for families or anyone looking for luxury amenities. The property features lagoon swimming, boat rides, a dolphin experience, and beautiful gardens.
+
+### Puu Waawaa Forest Reserve
+Puu Waawaa Forest Reserve is an incredible hiking spot located on the slopes of Hualalai. The reserve offers trails that wind through native Hawaiian dryland forests, providing breathtaking views of both Mauna Kea and Mauna Loa. The area is home to unique wildlife and plant species, making it a fantastic location for hikers interested in both scenic beauty and biodiversity.
 
 ### Kua Bay
 This beach is a local favorite for its soft white sand, clear turquoise waters, and great snorkeling opportunities. Located just north of Kona, Kua Bay is perfect for swimming or simply relaxing under the sun.
