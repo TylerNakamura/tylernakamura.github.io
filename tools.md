@@ -37,10 +37,5 @@ Perplexity AI is an AI-powered search and question-answering tool that helps use
 
 ---
 
-### *uBlock Origin (Chrome Extension)* - [ublockorigin.com](https://ublockorigin.com/)
-uBlock Origin is a lightweight and efficient ad blocker that helps improve your browsing experience by blocking ads, trackers, and other unwanted content. It’s highly customizable and works across multiple browsers to keep your browsing fast and clean.
-
----
-
 ### *VLC Media Player* - [videolan.org](https://www.videolan.org/)
 VLC Media Player is a free, open-source media player that supports a wide variety of audio and video formats. It’s highly versatile and works across multiple platforms, making it an essential tool for anyone looking to play multimedia files without hassle.
