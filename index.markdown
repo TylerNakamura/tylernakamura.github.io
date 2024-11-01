@@ -3,8 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: page
-image:
-  path: /assets/images/tylerphoto.jpg
+author:
+  picture: /assets/images/tylerphoto.jpg
 ---
 
 🧘
