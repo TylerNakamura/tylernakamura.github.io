@@ -3,7 +3,7 @@ layout: page
 permalink: /charity/
 ---
 
-I'm not sure how or why you've found yourself in my little corner of the internet, but while I have your attention, I invite you to consider supporting one of the organizations below. I believe these organizations offer some of the **most important and impactful ways to make the world a better place**.
+I'm not sure how or why you've found yourself in my little corner of the internet, but while I have your attention, I invite you to consider supporting one of the organizations below.
 
 ---
 
