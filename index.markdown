@@ -5,4 +5,4 @@
 layout: page
 ---
 
-Hello and welcome! My greatest passion is the journey toward self-actualization—becoming the best version of myself and helping others do the same.
+🧘

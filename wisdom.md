@@ -3,8 +3,6 @@ layout: page
 permalink: /wisdom/
 ---
 
-Below is a curated list of quotes that guide how I live my life.
-
 ---
 
 ### *"It is not daily increase but daily decrease; hack away the unessential."*  

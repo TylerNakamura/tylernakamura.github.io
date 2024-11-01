@@ -3,8 +3,6 @@ layout: page
 permalink: /tools/
 ---
 
-Here’s a curated list of my favorite tools that I believe more people should know about.
-
 ---
 
 ### *Anki* - [apps.ankiweb.net](https://apps.ankiweb.net/)

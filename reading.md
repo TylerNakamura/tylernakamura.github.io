@@ -3,8 +3,6 @@ layout: page
 permalink: /reading/
 ---
 
-Here’s a curated list of my favorite non-fiction books that have had a significant impact on my life. I hope they resonate with you as much as they have with me.
-
 ---
 
 ### *How to Win Friends and Influence People* by Dale Carnegie (1936)

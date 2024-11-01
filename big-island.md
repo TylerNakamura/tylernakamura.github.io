@@ -13,12 +13,6 @@ permalink: /big-island/
 - South Point (Ka Lae) is the southernmost point in the United States. (18° 55' N)
 - The Big Island is the youngest of Hawaii’s above-water islands (~500,000 y/o).
 
-I’ve shared some of my favorite recommendations for outdoor activities. For the real hidden gems, you’ll have to ask me in person.
-
-Please don’t take anything from the islands. Even small actions like collecting sand, rocks, or shells can have a lasting impact on Hawaii's fragile ecosystems by speeding up erosion and affecting the natural beauty of the islands.
-
-Mahalo, and have an unforgettable trip! 🌺
-
 ___
 
 ### Pololū Valley
