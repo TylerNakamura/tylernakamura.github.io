@@ -11,12 +11,12 @@ One of the best-known self-help books, Dale Carnegie's classic teaches timeless 
 ---
 
 ### *Fooled by Randomness* by Nassim Nicholas Taleb (2001)
-Taleb’s insightful book delves into the role of chance and luck in our lives, showing how we often mistake randomness for skill. It’s an eye-opening read on the unpredictability of life and how understanding randomness can change the way we make decisions.
+Taleb's insightful book delves into the role of chance and luck in our lives, showing how we often mistake randomness for skill. It's an eye-opening read on the unpredictability of life and how understanding randomness can change the way we make decisions.
 
 ---
 
 ### *Talent is Overrated: What Really Separates World-Class Performers from Everybody Else* by Geoff Colvin (2008)
-This book challenges the idea that talent is the key to success. Geoff Colvin argues that deliberate practice—focused, intense effort over time—is what truly separates top performers from the rest, not innate ability. It’s a great read for anyone striving for excellence.
+This book challenges the idea that talent is the key to success. Geoff Colvin argues that deliberate practice—focused, intense effort over time—is what truly separates top performers from the rest, not innate ability. It's a great read for anyone striving for excellence.
 
 ---
 
@@ -42,3 +42,8 @@ In this fascinating exploration of sleep, neuroscientist Matthew Walker explains
 
 ### *Atomic Habits* by James Clear (2018)
 James Clear provides a practical framework for improving your habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable personal growth. This book explains how small changes, compounded over time, can transform your life and help you achieve big goals.
+
+---
+
+### *The Bitcoin Standard* by Saifedean Ammous (2018)
+This book provides a comprehensive analysis of Bitcoin's role as a new form of money and its potential to become a global standard. Ammous explores the history of money, the properties that make for good money, and how Bitcoin's unique characteristics position it as a revolutionary monetary technology.
