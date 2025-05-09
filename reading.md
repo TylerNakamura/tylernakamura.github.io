@@ -42,8 +42,3 @@ In this fascinating exploration of sleep, neuroscientist Matthew Walker explains
 
 ### *Atomic Habits* by James Clear (2018)
 James Clear provides a practical framework for improving your habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable personal growth. This book explains how small changes, compounded over time, can transform your life and help you achieve big goals.
-
----
-
-### *The Bitcoin Standard* by Saifedean Ammous (2018)
-This book provides a comprehensive analysis of Bitcoin's role as a new form of money and its potential to become a global standard. Ammous explores the history of money, the properties that make for good money, and how Bitcoin's unique characteristics position it as a revolutionary monetary technology.
